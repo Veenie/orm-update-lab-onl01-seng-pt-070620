@@ -47,7 +47,10 @@ attr_reader :id
     Song.new(result[0], result[1], result[2])
   end
   
-  
+   def update
+    sql = "UPDATE songs SET name = ?, album = ? WHERE name = ?"
+    DB[:conn].execute(sql, self.name, self.album, self.name)
+  end
 
 
 end

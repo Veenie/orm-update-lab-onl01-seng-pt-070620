@@ -65,6 +65,9 @@ attr_reader :id
         SQL
     DB[:conn].execute(sql) 
   end
+  
+  def self.new_from_db(id, name, grade)
+    
 
 
 end

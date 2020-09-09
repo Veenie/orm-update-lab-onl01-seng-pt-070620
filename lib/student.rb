@@ -46,6 +46,8 @@ attr_reader :id
     result = DB[:conn].execute(sql, name)[0]
     Song.new(result[0], result[1], result[2])
   end
+  
+  
 
 
 end

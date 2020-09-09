@@ -5,13 +5,13 @@ class Student
   # Remember, you can access your database connection anywhere in this class
   #  with DB[:conn]
   
-attr_accessor :name, :album
+attr_accessor :name, :grade
 attr_reader :id
  
-  def initialize(id=nil, name, album)
+  def initialize(id=nil, name, grade)
     @id = id
     @name = name
-    @album = album
+    @grade = grade
   end
  
   def self.create_table
@@ -19,7 +19,7 @@ attr_reader :id
       CREATE TABLE IF NOT EXISTS songs (
         id INTEGER PRIMARY KEY,
         name TEXT,
-        album TEXT
+        grade TEXT
         )
         SQL
     DB[:conn].execute(sql)
@@ -27,16 +27,16 @@ attr_reader :id
  
   def save
     sql = <<-SQL
-      INSERT INTO songs (name, album)
+      INSERT INTO songs (name, grade)
       VALUES (?, ?)
     SQL
  
-    DB[:conn].execute(sql, self.name, self.album)
+    DB[:conn].execute(sql, self.name, self.grade)
     @id = DB[:conn].execute("SELECT last_insert_rowid() FROM songs")[0][0]
   end
  
-  def self.create(name:, album:)
-    song = Song.new(name, album)
+  def self.create(name:, grade:)
+    song = Song.new(name, grade)
     song.save
     song
   end
